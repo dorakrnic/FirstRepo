@@ -43,15 +43,19 @@ public class FrmPaint extends JFrame {
 	 * cuva naziv akcije - button clicked
 	 */
 	public static String actionStr;
-	public static Color boja;
+	public static Color boja=Color.red;
 	/**
 	 * bojaStr --> boja ivice
 	 */
 	public static String bojaStr="roza";
 	/**
-	 * bojaUnutr --> boja povrsine
+	 * bojaUnutr --> boja povrsine tip String
 	 */
 	public static String bojaUnutr="zuta";
+	/**
+	 * fillColor --> boja povrsine tip Color
+	 */
+	public static Color fillColor=Color.yellow;
 	
 	private final ButtonGroup btnGroupOblici = new ButtonGroup();
 	private final ButtonGroup btnGroupAkcija = new ButtonGroup();
@@ -264,6 +268,7 @@ public class FrmPaint extends JFrame {
 					ColorUtils cUtil=new ColorUtils();
 					bojaStr=cUtil.getColorNameFromColor(boja);
 					lblInfo.setText("Boja: " +bojaStr);
+					boja=Oblik.pronadjiBoju(boja);
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Boja nije izmenjena!", "Poruka", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -276,7 +281,7 @@ public class FrmPaint extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 				lblInfo.setText("Kliknuti unutar povrsinskog oblika da se oboji");
-				bojaUnutr=bojaStr;
+				fillColor=boja;
 			}
 		});
 /////////////////////////selekcija//////////////////////////////////	
@@ -340,17 +345,17 @@ public class FrmPaint extends JFrame {
 					dlgM.setVisible(true);
 					if(PnlCrtez.selektovan.typeToString()=="Kvadrat"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
-						PnlCrtez.selektovan.setBoja(bojaStr);
+						PnlCrtez.selektovan.setColor(boja);
 					}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
 						PnlCrtez.selektovan.setVisina(dlgM.visina);
-						PnlCrtez.selektovan.setBoja(bojaStr);
+						PnlCrtez.selektovan.setColor(boja);
 					}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
 						PnlCrtez.selektovan.setRadius(dlgM.sirina);
-						PnlCrtez.selektovan.setBoja(bojaStr);
+						PnlCrtez.selektovan.setColor(boja);
 					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
-						PnlCrtez.selektovan.setBoja(bojaStr);
+						PnlCrtez.selektovan.setColor(boja);
 					}
 					//Tacka je modifikovana u DlgModifikacija
 				}

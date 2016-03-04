@@ -41,8 +41,8 @@ public class DlgModifikacija extends JDialog {
 	public String type=PnlCrtez.selektovan.typeToString();
 	public int sirina;
 	public int visina;
-	public String boja;
-	public String bojaUnutrasnjosti;
+	public Color boja;
+	public Color bojaUnutrasnjosti;
 	public int pozicijaX;
 	public int pozicijaY;
 	boolean isNumb=true;
@@ -180,7 +180,10 @@ public class DlgModifikacija extends JDialog {
 			txtPomeriNaX.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getX()));
 			txtPomeriNaY.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getY()));
 			
+		}else if(type=="Linija"){
+			
 		}
+		
 		if(type=="Kvadrat"|| type=="Pravougaonik"){
 			txtNovaSirina.setText(String.valueOf(PnlCrtez.selektovan.getStranica()));
 			sirina=PnlCrtez.selektovan.getStranica();
@@ -308,13 +311,14 @@ public class DlgModifikacija extends JDialog {
 		btnBojaIvice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					
+					FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					ColorUtils cUtil=new ColorUtils();
+					FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
+					boja=Oblik.pronadjiBoju(boja);
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Boja nije izmenjena! Trenutna: " +FrmPaint.bojaStr, "Poruka", JOptionPane.INFORMATION_MESSAGE);
 				}
-				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
-				ColorUtils cUtil=new ColorUtils();
-				FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
+				
 				
 			}
 		});
@@ -322,11 +326,12 @@ public class DlgModifikacija extends JDialog {
 		btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					String tempBoja=FrmPaint.bojaUnutr;
+					Color tempBoja=FrmPaint.fillColor;
 					FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 					ColorUtils cUtil=new ColorUtils();
 					FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(FrmPaint.boja);
-					if(tempBoja!=FrmPaint.bojaUnutr)
+					FrmPaint.fillColor=Oblik.pronadjiBoju(boja);
+					if(tempBoja!=FrmPaint.fillColor)
 						isIspuni=true;
 					else
 						isIspuni=false;
@@ -382,7 +387,7 @@ public class DlgModifikacija extends JDialog {
 								sirina=Integer.parseInt(txtNovaSirina.getText());
 							}
 							if(type=="Kvadrat"){
-								((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 								if(isIspuni)
 									((Kvadrat)PnlCrtez.selektovan).setPopunjen(true);
 								else
@@ -390,21 +395,21 @@ public class DlgModifikacija extends JDialog {
 							}
 							if(type=="Pravougaonik"){
 								visina=Integer.parseInt(txtNovaVisina.getText());
-								((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 								if(isIspuni)
 									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(true);
 								else
 									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(false);
 							}
 							if(type=="Krug"){
-								((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 								if(isIspuni)
 									((Krug)PnlCrtez.selektovan).setPopunjen(true);
 								else
 									((Krug)PnlCrtez.selektovan).setPopunjen(false);
 							}	
 							if(type=="Tacka")
-								((Tacka) PnlCrtez.selektovan).setBoja(FrmPaint.bojaStr);
+								((Tacka) PnlCrtez.selektovan).setColor(FrmPaint.boja);
 							
 							if(chbPomeriNa.isSelected()){
 								pozicijaX=Integer.parseInt(txtPomeriNaX.getText());

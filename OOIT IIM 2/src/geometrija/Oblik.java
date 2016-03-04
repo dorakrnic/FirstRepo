@@ -3,11 +3,13 @@ package geometrija;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.JColorChooser;
+
 public abstract class Oblik implements Pomerljiv {
 	
 	protected String boja;
 	private boolean selektovan;
-	protected Color color;
+	protected static Color color;
 	public abstract boolean sadrzi(int x, int y) ;
 	private int stranica;
 	private int visina;
@@ -50,6 +52,11 @@ public abstract class Oblik implements Pomerljiv {
 			return Color.orange;
 		else
 			return Color.black;
+	}
+	
+	public static Color pronadjiBoju(Color boja){
+		color=new JColorChooser(boja).getColor();
+		return boja;
 	}
 
 	public String getBoja() {

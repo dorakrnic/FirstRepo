@@ -11,6 +11,8 @@ import geometrija.Tacka;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.omg.CORBA.SystemException;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -43,7 +45,7 @@ public class PnlCrtez extends JPanel {
 				if(FrmPaint.actionStr=="TACKA"){
 					int x = e.getX();
 					int y = e.getY();
-					Tacka t = new Tacka(x, y, FrmPaint.bojaStr);
+					Tacka t = new Tacka(x, y, FrmPaint.boja);
 					oblici.add(t);
 				}
 				else if(FrmPaint.actionStr=="LINIJA"){
@@ -53,41 +55,41 @@ public class PnlCrtez extends JPanel {
 					int y=e.getY();
 					System.out.println(clickCounter);
 					if(clickCounter%2!=0){
-						t1=new Tacka(x, y, FrmPaint.bojaStr);
+						t1=new Tacka(x, y, FrmPaint.boja);
 						oblici.add(t1);
 					}else{
-						t2=new Tacka(x,y,FrmPaint.bojaStr);
-						Linija l=new Linija(t1 , t2, FrmPaint.bojaStr);
+						t2=new Tacka(x,y,FrmPaint.boja);
+						Linija l=new Linija(t1 , t2, FrmPaint.boja);
 						oblici.add(t2);
 						oblici.add(l);
 						clickCounter=0;
 					}
 				}
 				else if(FrmPaint.actionStr=="KRUG"){
-					Tacka t3=new Tacka(e.getX(),e.getY(), FrmPaint.bojaStr);
+					Tacka t3=new Tacka(e.getX(),e.getY(), FrmPaint.boja);
 					DlgUpit dlg=new DlgUpit("KRUG");
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
 						int radius=dlg.radius;
-						Krug k=new Krug(t3,radius, FrmPaint.bojaStr);
+						Krug k=new Krug(t3,radius, FrmPaint.boja);
 						oblici.add(k);
 					}	
 				}
 				else if(FrmPaint.actionStr=="KVADRAT"){
-					Tacka t4=new Tacka(e.getX(),e.getY(), FrmPaint.bojaStr);
+					Tacka t4=new Tacka(e.getX(),e.getY(), FrmPaint.boja);
 					DlgUpit dlg=new DlgUpit("KVADRAT");
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
-						Kvadrat kv=new Kvadrat(t4,dlg.radius, FrmPaint.bojaStr);
+						Kvadrat kv=new Kvadrat(t4,dlg.radius, FrmPaint.boja);
 						oblici.add(kv);
 					}
 				}
 				else if(FrmPaint.actionStr=="PRAVOUGAONIK"){
-					Tacka t5=new Tacka(e.getX(),e.getY(), FrmPaint.bojaStr);
+					Tacka t5=new Tacka(e.getX(),e.getY(), FrmPaint.boja);
 					DlgUpit dlg=new DlgUpit(FrmPaint.actionStr);
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
-						p=new Pravougaonik(t5, dlg.radius, dlg.visina, FrmPaint.bojaStr);
+						p=new Pravougaonik(t5, dlg.radius, dlg.visina, FrmPaint.boja);
 						oblici.add(p);
 					}
 				}
@@ -100,12 +102,12 @@ public class PnlCrtez extends JPanel {
 							PovrsinskiOblik o=(PovrsinskiOblik)it.next();
 						
 							if(o.sadrzi(e.getX(), e.getY())){
-								o.setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								o.setBojaUnutrasnjosti(FrmPaint.fillColor);
 								o.setPopunjen(true);
 							}
 							
 						}catch(Exception ex){
-						
+							
 						}
 					}	
 						

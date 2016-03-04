@@ -1,5 +1,6 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Krug extends PovrsinskiOblik implements Comparable{
@@ -21,11 +22,23 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		this.radius = radius;
 		this.boja = boja;
 	}
+	public Krug(Tacka centar, int radius, Color boja){
+		this.centar = centar;
+		this.radius = radius;
+		this.setColor(boja);
+	}
 	
 	public Krug(Tacka centar, int radius, String boja, String bojaUnutrasnjosti){
 		this.centar = centar;
 		this.radius = radius;
 		this.boja = boja;
+		this.setBojaUnutrasnjosti(bojaUnutrasnjosti);
+	}
+	
+	public Krug(Tacka centar, int radius, Color boja, Color bojaUnutrasnjosti){
+		this.centar = centar;
+		this.radius = radius;
+		this.setColor(boja);
 		this.setBojaUnutrasnjosti(bojaUnutrasnjosti);
 	}
 	
@@ -42,7 +55,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	}
 	
 	public void popuni(Graphics g) {
-		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
+		g.setColor(pronadjiBoju(getAreaColor()));
 		g.fillOval(getCentar().getX()-radius+1, getCentar().getY() - radius+1, radius*2-2, 2*radius-2 );
 		
 	}
@@ -60,7 +73,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	}
 
 	public void crtajSe(Graphics g){
-		g.setColor(pronadjiBoju(getBoja()));
+		g.setColor(pronadjiBoju(getColor()));
 		g.drawOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		//g.fillOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		
@@ -84,7 +97,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 			return false;
 	}
 	public String toString(){
-		return "Krug: Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius +", boja= " +this.boja;
+		return "Krug: Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius +", boja= " +this.color;
 	}
 
 
