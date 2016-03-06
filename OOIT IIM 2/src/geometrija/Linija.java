@@ -2,6 +2,7 @@ package geometrija;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 public class Linija extends Oblik implements Comparable{
 	private Tacka pocetna;
@@ -46,11 +47,19 @@ public class Linija extends Oblik implements Comparable{
 	}
 
 	public void crtajSe(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColor()));
 		g.drawLine(pocetna.getX(), pocetna.getY(), krajnja.getX(), krajnja.getY());
+		
 		if(isSelektovan()){
 			selektovan(g);
 		}
+		if(isPromeniIvicu()){
+			promeniIvicu(g);
+		}
+	}
+	
+	public void promeniIvicu(Graphics g){
+		g.setColor(pronadjiBoju(this.getColor()));
 	}
 
 	public boolean equals (Object obj){
@@ -77,11 +86,6 @@ public class Linija extends Oblik implements Comparable{
 
 	}
 
-	public void pomeriZa(int zaX, int zaY){
-		pocetna.pomeriZa(zaX, zaY);
-		krajnja.pomeriZa(zaX, zaY);
-	}
-
 	public double duzina(){
 		double duzina = pocetna.udaljenost(krajnja);
 		return duzina;
@@ -100,7 +104,10 @@ public class Linija extends Oblik implements Comparable{
 		krajnja = novaKrajnja;
 	}
 
-
+	public void pomeriZa(int zaX, int zaY){
+		pocetna.pomeriZa(zaX, zaY);
+		krajnja.pomeriZa(zaX, zaY);
+	}
 	
 	public void pomeriNa(int x, int y) {
 		pocetna.pomeriNa(x, y);

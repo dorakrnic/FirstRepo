@@ -56,11 +56,11 @@ public class PnlCrtez extends JPanel {
 					System.out.println(clickCounter);
 					if(clickCounter%2!=0){
 						t1=new Tacka(x, y, FrmPaint.boja);
-						oblici.add(t1);
+						//oblici.add(t1);
 					}else{
 						t2=new Tacka(x,y,FrmPaint.boja);
 						Linija l=new Linija(t1 , t2, FrmPaint.boja);
-						oblici.add(t2);
+						//oblici.add(t2);
 						oblici.add(l);
 						clickCounter=0;
 					}
@@ -94,17 +94,23 @@ public class PnlCrtez extends JPanel {
 					}
 				}
 				
-				if(FrmPaint.actionStr=="POPUNI"){
+				else if(FrmPaint.actionStr=="POPUNI"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						try{
-							//mora jer linija i tacka nisu povrsinski oblici pa baca exception
+							Oblik oblik=(Oblik)it.next();
+							oblik.setPromeniIvicu(false);
 							PovrsinskiOblik o=(PovrsinskiOblik)it.next();
+							
+							if(((PovrsinskiOblik)oblik).sadrzi(e.getX(), e.getY())){
+								((PovrsinskiOblik)oblik).setBojaUnutrasnjosti(FrmPaint.fillColor);
+								((PovrsinskiOblik)oblik).setPopunjen(true);
+							}
 						
-							if(o.sadrzi(e.getX(), e.getY())){
+							/*if(o.sadrzi(e.getX(), e.getY())){
 								o.setBojaUnutrasnjosti(FrmPaint.fillColor);
 								o.setPopunjen(true);
-							}
+							}*/
 							
 						}catch(Exception ex){
 							
@@ -114,7 +120,7 @@ public class PnlCrtez extends JPanel {
 						
 				}
 				
-				if(FrmPaint.actionStr=="SELEKCIJA"){
+				else if(FrmPaint.actionStr=="SELEKCIJA"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						Oblik o=(Oblik)it.next();
@@ -136,7 +142,7 @@ public class PnlCrtez extends JPanel {
 					}
 				}
 				
-				if(FrmPaint.actionStr=="IZBRISI"){
+				else if(FrmPaint.actionStr=="IZBRISI"){
 					Iterator it = oblici.iterator();
 					
 						while(it.hasNext()){

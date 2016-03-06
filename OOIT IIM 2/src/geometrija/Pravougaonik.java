@@ -53,7 +53,7 @@ public class Pravougaonik extends Kvadrat {
 	}
 	
 	public void crtajSe (Graphics g){
-		g.setColor(pronadjiBoju(this.getColor()));
+		//g.setColor(pronadjiBoju(this.getColor()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);
 		
 		if(isSelektovan())
@@ -61,6 +61,13 @@ public class Pravougaonik extends Kvadrat {
 		if(isPopunjen()){
 			popuni(g);
 		}
+		if(isPromeniIvicu()){
+			promeniIvicu(g);
+		}
+	}
+	
+	public void promeniIvicu(Graphics g){
+		g.setColor(pronadjiBoju(this.getColor()));
 	}
 	
 	

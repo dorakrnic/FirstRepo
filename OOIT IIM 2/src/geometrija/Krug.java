@@ -25,7 +25,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	public Krug(Tacka centar, int radius, Color boja){
 		this.centar = centar;
 		this.radius = radius;
-		this.setColor(boja);
+		this.color=boja;
 	}
 	
 	public Krug(Tacka centar, int radius, String boja, String bojaUnutrasnjosti){
@@ -38,7 +38,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	public Krug(Tacka centar, int radius, Color boja, Color bojaUnutrasnjosti){
 		this.centar = centar;
 		this.radius = radius;
-		this.setColor(boja);
+		this.color=boja;
 		this.setBojaUnutrasnjosti(bojaUnutrasnjosti);
 	}
 	
@@ -46,8 +46,6 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		Krug drugi = (Krug)o;
 		return this.radius - drugi.radius;
 	}
-
-
 
 	public void selektovan(Graphics g)	{
 		new Linija(new Tacka(centar.getX(), centar.getY()-radius), new Tacka(centar.getX(), centar.getY() + radius)).selektovan(g);
@@ -73,7 +71,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	}
 
 	public void crtajSe(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColor()));
 		g.drawOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		//g.fillOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		
@@ -82,6 +80,13 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		if(isPopunjen()){
 			popuni(g);
 		}
+		if(isPromeniIvicu()){
+			promeniIvicu(g);
+		}
+	}
+	
+	public void promeniIvicu(Graphics g){
+		g.setColor(pronadjiBoju(getColor()));
 	}
 
 

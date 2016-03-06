@@ -264,11 +264,11 @@ public class FrmPaint extends JFrame {
 		tglbtnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					Color choosedColor=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 					ColorUtils cUtil=new ColorUtils();
-					bojaStr=cUtil.getColorNameFromColor(boja);
+					bojaStr=cUtil.getColorNameFromColor(choosedColor);
 					lblInfo.setText("Boja: " +bojaStr);
-					boja=Oblik.pronadjiBoju(boja);
+					boja=choosedColor;
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Boja nije izmenjena!", "Poruka", JOptionPane.INFORMATION_MESSAGE);
 				}

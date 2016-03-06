@@ -57,6 +57,9 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 		
 	}
 
+	public void promeniIvicu(Graphics g){
+		g.setColor(pronadjiBoju(getColor()));
+	}
 	
 	public boolean sadrzi(int x, int y) {
 		if(   (goreLevo.getX() < x && goreLevo.getX() + stranica > x)    &&
@@ -75,13 +78,16 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 	}
 	
 	public void crtajSe(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColor()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
 		
 		if(isSelektovan())
 			selektovan(g);
 		if(isPopunjen()){
 			popuni(g);
+		}
+		if(isPromeniIvicu()){
+			promeniIvicu(g);
 		}
 		
 	}
