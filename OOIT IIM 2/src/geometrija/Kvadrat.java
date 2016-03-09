@@ -32,7 +32,7 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 	public Kvadrat(Tacka goreLevo, int stranica, Color boja, Color bojaUnutr){
 		this.goreLevo = goreLevo;
 		this.stranica = stranica;
-		this.color = boja;
+		this.setColor(boja);
 		this.setBojaUnutrasnjosti(bojaUnutrasnjosti);
 	}
 	
@@ -58,7 +58,26 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 	}
 
 	public void promeniIvicu(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColBoja()));
+		g.setColor(getColBoja());
+	}
+	
+
+	
+	public void crtajSe(Graphics g){
+		//g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(getColBoja());
+		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
+		
+		if(isSelektovan())
+			selektovan(g);
+		if(isPopunjen()){
+			popuni(g);
+		}
+		if(isPromeniIvicu()){
+			promeniIvicu(g);
+		}
+		
 	}
 	
 	public boolean sadrzi(int x, int y) {
@@ -75,21 +94,6 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 	}
 	public String typeToString(){
 		return "Kvadrat";
-	}
-	
-	public void crtajSe(Graphics g){
-		//g.setColor(pronadjiBoju(getColor()));
-		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
-		
-		if(isSelektovan())
-			selektovan(g);
-		if(isPopunjen()){
-			popuni(g);
-		}
-		if(isPromeniIvicu()){
-			promeniIvicu(g);
-		}
-		
 	}
 	
 	public boolean equals(Object obj){

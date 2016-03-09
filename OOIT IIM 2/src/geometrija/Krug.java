@@ -58,20 +58,13 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		
 	}
 
-
-	public boolean sadrzi(int x, int y) {
-
-		Tacka nova = new Tacka(x, y);
-
-
-		if(nova.udaljenost(getCentar()) <= radius)
-			return true;
-		else
-			return false;
+	public void promeniIvicu(Graphics g){
+		g.setColor(getColBoja());
 	}
 
 	public void crtajSe(Graphics g){
 		//g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(getColBoja());
 		g.drawOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		//g.fillOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		
@@ -85,11 +78,17 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		}
 	}
 	
-	public void promeniIvicu(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+
+	public boolean sadrzi(int x, int y) {
+
+		Tacka nova = new Tacka(x, y);
+
+
+		if(nova.udaljenost(getCentar()) <= radius)
+			return true;
+		else
+			return false;
 	}
-
-
 	public boolean equals (Object obj){
 		if (obj instanceof Object){
 			Krug pomocni = (Krug) obj;

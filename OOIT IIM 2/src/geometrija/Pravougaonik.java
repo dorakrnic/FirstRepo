@@ -47,13 +47,15 @@ public class Pravougaonik extends Kvadrat {
 	}
 	
 	public void popuni(Graphics g) {
-		g.setColor(pronadjiBoju(getAreaColor()));
+		//g.setColor(pronadjiBoju(getAreaColor()));
+		g.setColor(getAreaColor());
 		g.fillRect(getGoreLevo().getX()+1, getGoreLevo().getY()+1, getStranica()-1, visina-1);
 		
 	}
 	
 	public void crtajSe (Graphics g){
 		//g.setColor(pronadjiBoju(this.getColor()));
+		//g.setColor(getColBoja());
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);
 		
 		if(isSelektovan())
@@ -67,7 +69,8 @@ public class Pravougaonik extends Kvadrat {
 	}
 	
 	public void promeniIvicu(Graphics g){
-		g.setColor(pronadjiBoju(this.getColor()));
+		//g.setColor(pronadjiBoju(getColBoja()));
+		g.setColor(getColBoja());
 	}
 	
 	

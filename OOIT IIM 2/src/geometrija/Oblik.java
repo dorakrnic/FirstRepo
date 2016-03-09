@@ -10,7 +10,7 @@ public abstract class Oblik implements Pomerljiv {
 	protected String boja;
 	private boolean selektovan;
 	private boolean promeniIvicu;
-	protected static Color color;
+	protected static Color color=Color.cyan;
 	public abstract boolean sadrzi(int x, int y) ;
 	private int stranica;
 	private int visina;
@@ -56,8 +56,8 @@ public abstract class Oblik implements Pomerljiv {
 	}
 	
 	public static Color pronadjiBoju(Color boja){
-		color=new JColorChooser(boja).getColor();
-		//color=boja;
+		//color=new JColorChooser(boja).getColor();
+		color=boja;
 		return color;
 	}
 
@@ -69,7 +69,7 @@ public abstract class Oblik implements Pomerljiv {
 		this.boja = boja;
 	}
 	
-	public Color getColor(){
+	public Color getColBoja(){
 		return color;
 	}
 

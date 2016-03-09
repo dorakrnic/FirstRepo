@@ -43,8 +43,8 @@ public class DlgModifikacija extends JDialog {
 	public double duzina;
 	public int sirina;
 	public int visina;
-	//public Color boja;
-	//public Color bojaUnutrasnjosti;
+	public Color b;
+	public Color bUn;
 	public int pozicijaX;
 	public int pozicijaY;
 	boolean isNumb=true;
@@ -378,15 +378,25 @@ public class DlgModifikacija extends JDialog {
 		btnBojaIvice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					Color t=FrmPaint.boja;
+					//FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					b=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 					ColorUtils cUtil=new ColorUtils();
 					FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
-					
+					if(b!=null && b!=t){
+						PnlCrtez.selektovan.setPromeniIvicu(true);
+						//FrmPaint.boja=b;
+					}
+					else{
+						PnlCrtez.selektovan.setPromeniIvicu(false);
+					}
 					//boja=Oblik.pronadjiBoju(FrmPaint.boja);
 					
 					okButton.setEnabled(true);
 				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "Boja nije izmenjena! Trenutna: " +FrmPaint.bojaStr, "Poruka", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Boja nije izmenjena! Trenutna: " +b.toString(), "Poruka", JOptionPane.INFORMATION_MESSAGE);
+					okButton.setEnabled(true);
+					//FrmPaint.boja=b;
 				}
 				
 				
@@ -396,18 +406,20 @@ public class DlgModifikacija extends JDialog {
 		btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					Color tempBoja=FrmPaint.fillColor;
-					FrmPaint.fillColor=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					Color t=FrmPaint.fillColor;
+					bUn=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 					ColorUtils cUtil=new ColorUtils();
-					FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(FrmPaint.fillColor);
+					FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(bUn);
 					//FrmPaint.fillColor=FrmPaint.boja;
-					if(tempBoja!=FrmPaint.fillColor)
+					if(bUn!=t && bUn!=null)
 						isIspuni=true;
 					else
 						isIspuni=false;
 					okButton.setEnabled(true);
 				}catch(Exception ex){
-					JOptionPane.showMessageDialog(null, "Boja nije izmenjena, oblik se nece popuniti", "Poruka", JOptionPane.INFORMATION_MESSAGE);				
+					JOptionPane.showMessageDialog(null, "Boja nije izmenjena, oblik se nece popuniti", "Poruka", JOptionPane.INFORMATION_MESSAGE);		
+					okButton.setEnabled(true);
+						//FrmPaint.fillColor=bUn;
 				}
 				
 			}
@@ -458,24 +470,31 @@ public class DlgModifikacija extends JDialog {
 								sirina=Integer.parseInt(txtNovaSirina.getText());
 							}
 							if(type=="Kvadrat"){
-								((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
-								if(isIspuni)
+								
+								if(isIspuni){
+									((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 									((Kvadrat)PnlCrtez.selektovan).setPopunjen(true);
+								}
+								
 								else
 									((Kvadrat)PnlCrtez.selektovan).setPopunjen(false);
 							}
 							if(type=="Pravougaonik"){
 								visina=Integer.parseInt(txtNovaVisina.getText());
-								((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
-								if(isIspuni)
+								
+								if(isIspuni){
+									((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(true);
+								}
+									
 								else
 									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(false);
 							}
 							if(type=="Krug"){
-								((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
-								if(isIspuni)
+								if(isIspuni){
+									((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.fillColor);
 									((Krug)PnlCrtez.selektovan).setPopunjen(true);
+								}
 								else
 									((Krug)PnlCrtez.selektovan).setPopunjen(false);
 							}	

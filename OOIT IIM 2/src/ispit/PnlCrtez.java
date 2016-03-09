@@ -80,7 +80,7 @@ public class PnlCrtez extends JPanel {
 					DlgUpit dlg=new DlgUpit("KVADRAT");
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
-						Kvadrat kv=new Kvadrat(t4,dlg.radius, FrmPaint.boja);
+						Kvadrat kv=new Kvadrat(t4, dlg.radius, FrmPaint.boja);
 						oblici.add(kv);
 					}
 				}
@@ -94,7 +94,7 @@ public class PnlCrtez extends JPanel {
 					}
 				}
 				
-				else if(FrmPaint.actionStr=="POPUNI"){
+				if(FrmPaint.actionStr=="POPUNI"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						try{
@@ -120,29 +120,34 @@ public class PnlCrtez extends JPanel {
 						
 				}
 				
-				else if(FrmPaint.actionStr=="SELEKCIJA"){
+				if(FrmPaint.actionStr=="SELEKCIJA"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						Oblik o=(Oblik)it.next();
+						o.setPromeniIvicu(false);
 						
 						if(o.sadrzi(e.getX(), e.getY())){
 							if(o.isSelektovan()){
 								o.setSelektovan(false);
-								selektovan=null;
 							}else{
 								o.setSelektovan(true);
 								selektovan=o;
 							}
 								
 						}else{
-							o.setSelektovan(false);	
-							selektovan=null;
+							if(o.isSelektovan()){
+								o.setSelektovan(false);
+								selektovan=null;
+							}else{
+								o.setSelektovan(false);
+							}
+							
 						}
-						
+						//proveriti da se modifikacija ne otvara ukoliko nije nesto selektovano
 					}
 				}
 				
-				else if(FrmPaint.actionStr=="IZBRISI"){
+				if(FrmPaint.actionStr=="IZBRISI"){
 					Iterator it = oblici.iterator();
 					
 						while(it.hasNext()){
@@ -159,7 +164,7 @@ public class PnlCrtez extends JPanel {
 											
 								}
 							}catch(Exception ex){
-								
+								JOptionPane.showMessageDialog(null, "greska");
 							}
 						
 						}
@@ -177,8 +182,7 @@ public class PnlCrtez extends JPanel {
 		Iterator it = oblici.iterator();
 		while(it.hasNext()){
 			Oblik o = (Oblik) it.next();
-			o.crtajSe(g);
-			
+			o.crtajSe(g);	
 		}
 		repaint();
 	}

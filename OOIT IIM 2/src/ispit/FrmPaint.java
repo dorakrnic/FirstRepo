@@ -43,7 +43,7 @@ public class FrmPaint extends JFrame {
 	 * cuva naziv akcije - button clicked
 	 */
 	public static String actionStr;
-	public static Color boja=Color.red;
+	public static Color boja=Color.magenta;
 	/**
 	 * bojaStr --> boja ivice
 	 */
@@ -55,7 +55,7 @@ public class FrmPaint extends JFrame {
 	/**
 	 * fillColor --> boja povrsine tip Color
 	 */
-	public static Color fillColor=Color.yellow;
+	public static Color fillColor;
 	
 	private final ButtonGroup btnGroupOblici = new ButtonGroup();
 	private final ButtonGroup btnGroupAkcija = new ButtonGroup();
@@ -268,6 +268,7 @@ public class FrmPaint extends JFrame {
 					ColorUtils cUtil=new ColorUtils();
 					bojaStr=cUtil.getColorNameFromColor(choosedColor);
 					lblInfo.setText("Boja: " +bojaStr);
+					actionStr=e.getActionCommand();
 					boja=choosedColor;
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Boja nije izmenjena!", "Poruka", JOptionPane.INFORMATION_MESSAGE);
@@ -345,17 +346,21 @@ public class FrmPaint extends JFrame {
 					dlgM.setVisible(true);
 					if(PnlCrtez.selektovan.typeToString()=="Kvadrat"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
-						PnlCrtez.selektovan.setColor(boja);
+						if(PnlCrtez.selektovan.isPromeniIvicu())
+							PnlCrtez.selektovan.setColor(dlgM.b);
 					}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
 						PnlCrtez.selektovan.setVisina(dlgM.visina);
-						PnlCrtez.selektovan.setColor(boja);
+						if(PnlCrtez.selektovan.isPromeniIvicu())
+							PnlCrtez.selektovan.setColor(dlgM.b);
 					}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
 						PnlCrtez.selektovan.setRadius(dlgM.sirina);
-						PnlCrtez.selektovan.setColor(boja);
+						if(PnlCrtez.selektovan.isPromeniIvicu())
+							PnlCrtez.selektovan.setColor(dlgM.b);
 					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
-						PnlCrtez.selektovan.setColor(boja);
+						if(PnlCrtez.selektovan.isPromeniIvicu())
+							PnlCrtez.selektovan.setColor(dlgM.b);
 					}
 					//Tacka je modifikovana u DlgModifikacija
 				}

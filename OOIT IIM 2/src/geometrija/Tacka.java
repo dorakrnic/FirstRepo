@@ -15,7 +15,7 @@ public class Tacka extends Oblik implements Comparable{
 
 	public Tacka(){
 		this.boja = "";
-		this.color=Color.red;
+		//this.color=Color.red;
 	}
 
 	public Tacka(int x, int y){
@@ -47,14 +47,16 @@ public class Tacka extends Oblik implements Comparable{
 	}
 	
 	public void promeniIvicu(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColBoja()));
+		g.setColor(getColBoja());
 	}
 	/**
 	 Ova metoda omogucuje iscrtavanje objekata
 	 @return ne vraca nista
 	 * */
 	public void crtajSe(Graphics g){
-		g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(pronadjiBoju(getColor()));
+		//g.setColor(getColBoja());
 		g.drawLine(x-2, y, x+2, y);
 		g.drawLine(x, y-2, x, y+2);		
 
